@@ -1,0 +1,40 @@
+﻿@model LocacaoVeiculos.Models.CategoriaVeiculo
+
+@{
+    ViewData["Title"] = "Excluir Categoria";
+}
+
+<div class="container mt-4">
+    <h2>Excluir Categoria</h2>
+
+    <div class="alert alert-warning mt-3">
+        Tem certeza de que deseja excluir esta categoria?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Nome</dt>
+        <dd class="col-sm-9">@Model.Nome</dd>
+
+        <dt class="col-sm-3">Descrição</dt>
+        <dd class="col-sm-9">@Model.Descricao</dd>
+
+        <dt class="col-sm-3">Valor da diária</dt>
+        <dd class="col-sm-9">
+            @Model.ValorDiaria.ToString("C")
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <button type="submit" class="btn btn-danger">
+            Confirmar Exclusão
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+</div>

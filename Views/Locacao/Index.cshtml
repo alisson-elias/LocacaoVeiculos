@@ -1,0 +1,105 @@
+﻿@model IEnumerable<LocacaoVeiculos.Models.Locacao>
+
+@{
+    ViewData["Title"] = "Locações";
+}
+
+<h1>Locações</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Registrar locação
+    </a>
+</p>
+
+@if (TempData["Sucesso"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Sucesso"]
+    </div>
+}
+
+@if (TempData["Erro"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Erro"]
+    </div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Veículo</th>
+            <th>Início</th>
+            <th>Término</th>
+            <th>Valor total</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var locacao in Model)
+        {
+            <tr>
+                <td>@locacao.Cliente?.Nome</td>
+
+                <td>
+                    @locacao.Veiculo?.Marca
+                    @locacao.Veiculo?.Modelo
+                </td>
+
+                <td>@locacao.DataInicio.ToString("dd/MM/yyyy")</td>
+
+                <td>@locacao.DataFim.ToString("dd/MM/yyyy")</td>
+
+                <td>@locacao.ValorTotal.ToString("C")</td>
+
+                <td>
+                    @if (locacao.Status == "Pendente")
+                    {
+                        <span class="badge bg-warning text-dark">
+                            Pendente
+                        </span>
+                    }
+                    else if (locacao.Status == "Concluida")
+                    {
+                        <span class="badge bg-success">
+                            Concluída
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">
+                            @locacao.Status
+                        </span>
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@locacao.Id"
+                       class="btn btn-info btn-sm">
+                        Detalhes
+                    </a>
+
+                    @if (locacao.Status == "Pendente")
+                    {
+                        <a asp-action="Edit"
+                           asp-route-id="@locacao.Id"
+                           class="btn btn-warning btn-sm">
+                            Editar
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@locacao.Id"
+                           class="btn btn-danger btn-sm">
+                            Excluir
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

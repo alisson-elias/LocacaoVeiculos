@@ -1,0 +1,92 @@
+﻿@model LocacaoVeiculos.Models.Locacao
+
+@{
+    ViewData["Title"] = "Editar locação";
+}
+
+<h1>Editar locação</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="ClienteId" class="form-label">
+                    Cliente
+                </label>
+
+                <select asp-for="ClienteId"
+                        asp-items="ViewBag.Clientes"
+                        class="form-select">
+                    <option value="">Selecione um cliente</option>
+                </select>
+
+                <span asp-validation-for="ClienteId"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VeiculoId" class="form-label">
+                    Veículo
+                </label>
+
+                <select asp-for="VeiculoId"
+                        asp-items="ViewBag.Veiculos"
+                        class="form-select">
+                    <option value="">Selecione um veículo</option>
+                </select>
+
+                <span asp-validation-for="VeiculoId"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataInicio" class="form-label">
+                    Data de início
+                </label>
+
+                <input asp-for="DataInicio"
+                       type="date"
+                       class="form-control" />
+
+                <span asp-validation-for="DataInicio"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataFim" class="form-label">
+                    Data de término
+                </label>
+
+                <input asp-for="DataFim"
+                       type="date"
+                       class="form-control" />
+
+                <span asp-validation-for="DataFim"
+                      class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Salvar alterações
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Voltar
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

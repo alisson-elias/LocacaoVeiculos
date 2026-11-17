@@ -1,0 +1,42 @@
+﻿@model LocacaoVeiculos.Models.Veiculo
+
+@{
+    ViewData["Title"] = "Excluir veículo";
+}
+
+<h1>Excluir veículo</h1>
+
+<div class="alert alert-warning">
+    Tem certeza de que deseja excluir este veículo?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Marca</dt>
+    <dd class="col-sm-9">@Model.Marca</dd>
+
+    <dt class="col-sm-3">Modelo</dt>
+    <dd class="col-sm-9">@Model.Modelo</dd>
+
+    <dt class="col-sm-3">Placa</dt>
+    <dd class="col-sm-9">@Model.Placa</dd>
+
+    <dt class="col-sm-3">Ano</dt>
+    <dd class="col-sm-9">@Model.Ano</dd>
+
+    <dt class="col-sm-3">Categoria</dt>
+    <dd class="col-sm-9">
+        @Model.CategoriaVeiculo?.Nome
+    </dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Confirmar exclusão
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>

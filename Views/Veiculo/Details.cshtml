@@ -1,0 +1,48 @@
+﻿@model LocacaoVeiculos.Models.Veiculo
+
+@{
+    ViewData["Title"] = "Detalhes do veículo";
+}
+
+<h1>Detalhes do veículo</h1>
+
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Marca</dt>
+    <dd class="col-sm-9">@Model.Marca</dd>
+
+    <dt class="col-sm-3">Modelo</dt>
+    <dd class="col-sm-9">@Model.Modelo</dd>
+
+    <dt class="col-sm-3">Placa</dt>
+    <dd class="col-sm-9">@Model.Placa</dd>
+
+    <dt class="col-sm-3">Ano</dt>
+    <dd class="col-sm-9">@Model.Ano</dd>
+
+    <dt class="col-sm-3">Categoria</dt>
+    <dd class="col-sm-9">
+        @Model.CategoriaVeiculo?.Nome
+    </dd>
+
+    <dt class="col-sm-3">Valor da diária</dt>
+    <dd class="col-sm-9">
+        @(Model.CategoriaVeiculo?.ValorDiaria.ToString("C") ?? "Não informado")
+    </dd>
+
+    <dt class="col-sm-3">Disponibilidade</dt>
+    <dd class="col-sm-9">
+        @(Model.Disponivel ? "Disponível" : "Indisponível")
+    </dd>
+</dl>
+
+<a asp-action="Edit"
+   asp-route-id="@Model.Id"
+   class="btn btn-warning">
+    Editar
+</a>
+
+<a asp-action="Index" class="btn btn-secondary">
+    Voltar
+</a>

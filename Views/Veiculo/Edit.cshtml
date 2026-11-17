@@ -1,0 +1,93 @@
+﻿@model LocacaoVeiculos.Models.Veiculo
+
+@{
+    ViewData["Title"] = "Editar veículo";
+}
+
+<h1>Editar veículo</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Marca" class="form-label"></label>
+                <input asp-for="Marca" class="form-control" />
+                <span asp-validation-for="Marca"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Modelo" class="form-label"></label>
+                <input asp-for="Modelo" class="form-control" />
+                <span asp-validation-for="Modelo"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Placa" class="form-label"></label>
+                <input asp-for="Placa"
+                       class="form-control"
+                       maxlength="7" />
+                <span asp-validation-for="Placa"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Ano" class="form-label"></label>
+                <input asp-for="Ano"
+                       type="number"
+                       class="form-control" />
+                <span asp-validation-for="Ano"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CategoriaVeiculoId"
+                       class="form-label">
+                    Categoria
+                </label>
+
+                <select asp-for="CategoriaVeiculoId"
+                        asp-items="ViewBag.Categorias"
+                        class="form-select">
+                    <option value="">Selecione uma categoria</option>
+                </select>
+
+                <span asp-validation-for="CategoriaVeiculoId"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="Disponivel"
+                       class="form-check-input" />
+                <label asp-for="Disponivel"
+                       class="form-check-label">
+                    Veículo disponível
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Salvar alterações
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                Voltar
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

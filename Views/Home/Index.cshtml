@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Início";
+}
+
+<div class="container py-4">
+
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-3">
+            <h1 class="display-5 fw-bold">
+                Sistema de Locação de Veículos
+            </h1>
+
+            <p class="col-md-8 fs-5">
+                Gerencie veículos, categorias, clientes e locações
+                em um único lugar.
+            </p>
+
+            <a asp-controller="Locacao"
+               asp-action="Index"
+               class="btn btn-primary btn-lg">
+                Gerenciar locações
+            </a>
+        </div>
+    </div>
+
+    <h2 class="mb-4">Módulos do sistema</h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Veículos</h5>
+                    <p class="card-text">
+                        Cadastre e gerencie os veículos disponíveis
+                        para locação.
+                    </p>
+
+                    <a asp-controller="Veiculo"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Categorias</h5>
+                    <p class="card-text">
+                        Organize os veículos por categoria e valor
+                        da diária.
+                    </p>
+
+                    <a asp-controller="Categoria"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Clientes</h5>
+                    <p class="card-text">
+                        Cadastre e consulte os clientes do sistema.
+                    </p>
+
+                    <a asp-controller="Cliente"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Locações</h5>
+                    <p class="card-text">
+                        Registre locações, consulte contratos
+                        e gerencie devoluções.
+                    </p>
+
+                    <a asp-controller="Locacao"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Acessar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

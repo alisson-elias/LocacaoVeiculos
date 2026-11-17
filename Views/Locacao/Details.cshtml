@@ -1,0 +1,83 @@
+﻿@model LocacaoVeiculos.Models.Locacao
+
+@{
+    ViewData["Title"] = "Detalhes da locação";
+}
+
+<h1>Detalhes da locação</h1>
+
+<hr />
+
+<dl class="row">
+
+    <dt class="col-sm-3">Cliente</dt>
+    <dd class="col-sm-9">
+        @Model.Cliente?.Nome
+    </dd>
+
+    <dt class="col-sm-3">CPF</dt>
+    <dd class="col-sm-9">
+        @Model.Cliente?.CPF
+    </dd>
+
+    <dt class="col-sm-3">Veículo</dt>
+    <dd class="col-sm-9">
+        @Model.Veiculo?.Marca @Model.Veiculo?.Modelo
+    </dd>
+
+    <dt class="col-sm-3">Placa</dt>
+    <dd class="col-sm-9">
+        @Model.Veiculo?.Placa
+    </dd>
+
+    <dt class="col-sm-3">Data de início</dt>
+    <dd class="col-sm-9">
+        @Model.DataInicio.ToString("dd/MM/yyyy")
+    </dd>
+
+    <dt class="col-sm-3">Data de término</dt>
+    <dd class="col-sm-9">
+        @Model.DataFim.ToString("dd/MM/yyyy")
+    </dd>
+
+    <dt class="col-sm-3">Data de devolução</dt>
+    <dd class="col-sm-9">
+        @(Model.DataDevolucao?.ToString("dd/MM/yyyy HH:mm") ?? "Não devolvido")
+    </dd>
+
+    <dt class="col-sm-3">Valor total</dt>
+    <dd class="col-sm-9">
+        @Model.ValorTotal.ToString("C")
+    </dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">
+        @Model.Status
+    </dd>
+
+</dl>
+
+@if (Model.Status == "Pendente")
+{
+    <form asp-action="RegistrarDevolucao"
+          asp-route-id="@Model.Id"
+          method="post"
+          class="d-inline">
+
+        <button type="submit"
+                class="btn btn-success"
+                onclick="return confirm('Confirmar a devolução deste veículo?')">
+            Registrar devolução
+        </button>
+    </form>
+
+    <a asp-action="Edit"
+       asp-route-id="@Model.Id"
+       class="btn btn-warning">
+        Editar
+    </a>
+}
+
+<a asp-action="Index" class="btn btn-secondary">
+    Voltar
+</a>
