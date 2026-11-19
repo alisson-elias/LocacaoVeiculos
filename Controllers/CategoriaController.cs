@@ -44,6 +44,8 @@ namespace LocacaoVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoriaVeiculo categoria)
         {
+            CorrigirErroValorDiaria();
+
             if (!ModelState.IsValid)
                 return View(categoria);
 
@@ -83,6 +85,8 @@ namespace LocacaoVeiculos.Controllers
         {
             if (id != categoria.Id)
                 return NotFound();
+
+            CorrigirErroValorDiaria();
 
             if (!ModelState.IsValid)
                 return View(categoria);
@@ -132,6 +136,23 @@ namespace LocacaoVeiculos.Controllers
                 TempData["Erro"] = ex.Message;
 
                 return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // Corrige a mensagem quando o valor da diária é enviado vazio
+        private void CorrigirErroValorDiaria()
+        {
+            var chave = nameof(CategoriaVeiculo.ValorDiaria);
+
+            if (ModelState.TryGetValue(chave, out var entrada) &&
+                string.IsNullOrWhiteSpace(entrada.AttemptedValue))
+            {
+                ModelState.Remove(chave);
+
+                ModelState.AddModelError(
+                    chave,
+                    "O valor da diária é obrigatório."
+                );
             }
         }
     }

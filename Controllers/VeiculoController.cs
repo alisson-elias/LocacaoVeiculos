@@ -1,5 +1,6 @@
 ﻿
 using LocacaoVeiculos.Models;
+using LocacaoVeiculos.ViewModels;
 using LocacaoVeiculos.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -41,32 +42,46 @@ namespace LocacaoVeiculos.Controllers
         public async Task<IActionResult> Create()
         {
             await CarregarCategorias();
-            return View();
+
+            return View(new VeiculoFormViewModel());
         }
 
-        // POST: Veiculo/Create
+        // POST: Veiculo/Create      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Veiculo veiculo)
+        public async Task<IActionResult> Create(VeiculoFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                await CarregarCategorias(veiculo.CategoriaVeiculoId);
-                return View(veiculo);
+                await CarregarCategorias(model.CategoriaVeiculoId);
+                return View(model);
             }
 
             try
             {
+                var veiculo = new Veiculo
+                {
+                    Marca = model.Marca,
+                    Modelo = model.Modelo,
+                    Placa = model.Placa,
+                    Ano = model.Ano!.Value,
+                    CategoriaVeiculoId = model.CategoriaVeiculoId!.Value,
+                    Disponivel = model.Disponivel
+                };
+
                 await _veiculoService.AdicionarAsync(veiculo);
 
                 TempData["Sucesso"] = "Veículo cadastrado com sucesso!";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, ex.Message);
-                await CarregarCategorias(veiculo.CategoriaVeiculoId);
-                return View(veiculo);
+
+                await CarregarCategorias(model.CategoriaVeiculoId);
+
+                return View(model);
             }
         }
 

@@ -19,6 +19,7 @@ namespace LocacaoVeiculos.Models
         [StringLength(7, MinimumLength = 7)]
         public string Placa { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "O ano é obrigatório.")]
         [Range(1900, 2100,
             ErrorMessage = "Ano inválido.")]
         public int Ano { get; set; }
@@ -26,10 +27,11 @@ namespace LocacaoVeiculos.Models
         public bool Disponivel { get; set; } = true;
 
         // Chave estrangeira
-        [Required]
+        [Required(ErrorMessage = "Selecione uma categoria.")]     
         public int CategoriaVeiculoId { get; set; }
 
         // Relacionamento: veículo pertence a uma categoria
+        [Required(ErrorMessage = "Selecione uma categoria.")]
         public CategoriaVeiculo? CategoriaVeiculo { get; set; }
 
         // Relacionamento: veículo pode possuir várias locações

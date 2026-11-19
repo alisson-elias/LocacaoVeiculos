@@ -12,12 +12,13 @@ namespace LocacaoVeiculos.Models
         [StringLength(50)]
         public string Nome { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "A descrição da categoria é obrigatória.")]
         [StringLength(200)]
         public string? Descricao { get; set; }
 
         [Required(ErrorMessage = "O valor da diária é obrigatório.")]
-        [Range(0.01, 999999.99,
-            ErrorMessage = "O valor da diária deve ser maior que zero.")]
+        [Range(0.01, 9999.99,
+        ErrorMessage = "O valor da diária deve ser maior que zero.")]
         public decimal ValorDiaria { get; set; }
 
         // Relacionamento: uma categoria possui vários veículos
